@@ -8,8 +8,6 @@ package gameoflife;
  *
  * @author zachroyer
  */
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class gameLogic {
@@ -19,22 +17,6 @@ public class gameLogic {
 
 	public gameLogic() {
 
-		/*
-        Rules:
-        FOR A POPULATED SPACE
-        
-            Each cell with ONE or NO neighbors dies
-        
-            Each cell with FOUR or more neighbors dies
-        
-            Each cell with TWO or THREE neighbors survives
-        
-        
-        FOR AN UNPOPULATED SPACE
-        
-             Each cell with three neighbors becomes populated
-        
-		 */
 	}
 
 	//Overloaded constructor to specify if you want the gameSpace to display some cells for you
@@ -89,11 +71,6 @@ public class gameLogic {
 		return aliveNeighbors;
 	}
 
-//		switch () // if northwest neighbor exists
-//		//if northwest neighbor is alive
-//		//update neighbor count
-//		
-//		return 0;
 	/*
 	*	Cycles Through Grid
 	*	gets neighbor count of cell
@@ -125,6 +102,21 @@ public class gameLogic {
 	//Takes a Cell and the Cell's neighbor count and applies game logic
 	private Cell updateCell(Cell cell, int nCount) {
 
+		/*
+		* Rules:
+		* FOR A POPULATED SPACE
+        
+		* Each cell with ONE or NO neighbors dies
+		
+		* Each cell with FOUR or more neighbors dies
+        
+		* Each cell with TWO or THREE neighbors survives
+        
+		* FOR AN UNPOPULATED SPACE
+        
+		* Each cell with three neighbors becomes populated
+        
+		 */
 		if (cell.alive) {
 			switch (nCount) {
 				case 0, 1 ->
@@ -136,11 +128,14 @@ public class gameLogic {
 			}
 
 		} else if (nCount == 3) {
-
+			cell.changeState();
 		}
-		/*
+		
+		return cell;
+	}
+}
+/*
 	TO-DO LIST:
         
     Getter method for 2d array to be able to fill with JComponents 
-		 */
-	}
+ */
