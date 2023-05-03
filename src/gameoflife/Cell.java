@@ -5,23 +5,25 @@
 package gameoflife;
 
 import java.awt.Point;
-import javax.swing.JButton;
 
 /**
  *
  * @author zachroyer
  */
-public class Cell extends JButton {
+public class Cell {
 
-	Point position;
+	final public Point position;
 	boolean alive;
+	private int neighborCount;
 
 	public Cell(int xPos, int yPos, boolean state) {
 
 		alive = state;
+		neighborCount = 0;
 		position = new Point();
 
 		position.setLocation(xPos, yPos);
+		
 	}
 
 	public void changeState(int change) {
@@ -30,5 +32,10 @@ public class Cell extends JButton {
 		}
 
 	}
+	
+	public void setNeighborCount(int nCount) {
+		this.neighborCount = nCount;
+	}
+	
 
 }
