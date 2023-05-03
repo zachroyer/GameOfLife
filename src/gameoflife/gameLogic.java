@@ -8,12 +8,14 @@ package gameoflife;
  *
  * @author zachroyer
  */
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class gameLogic {
 
-	private Cell[][] nextState;
 	Cell[][] gameSpace = new Cell[25][25];
+//	ArrayList<ArrayList<Cell>> gameSpace = new ArrayList<>(25);
 
 	public gameLogic() {
 
@@ -56,8 +58,7 @@ public class gameLogic {
 
 	//Method for checking if neighbors are populated
 	private int neighborCount(Cell cell) {
-		
-	
+
 		return 1;
 //		int thisX = this.getCell(, 0)
 //		switch () // if northwest neighbor exists
@@ -72,22 +73,31 @@ public class gameLogic {
 	*	gets neighbor count of cell
 	*	Updates Cell state based on neighbor 
 	*	count through updateCell() method
-	*/
-
-	private void updateGameSpace(/*cell, int state returned from neighborCount()*/int state) {
+	 */
+	private void updateGameSpace() {
 
 		Cell[][] nextState = this.gameSpace;
 
+		//Loops through each cell in gameSpace
 		for (int i = 0; i < 25; i++) {
 			for (int c = 0; c < 25; c++) {
-				int currneighborCount = neighborCount(getCell(i, c));
+
+				//grabs cells current neighbors
+				Cell currCell = getCell(i, c);
+				int currNeighborCount = neighborCount(currCell);
+
+				//Updates and adds cell to staged nextState game space
+				nextState[i][c] = updateCell(currCell, currNeighborCount);
 
 			}
 		}
+		
+		//updates gameSpace with the cells that have been checked wiht game logic
+		this.gameSpace = nextState;
 	}
 
-	//Takes a cell and the Cell's 
-	private void updateCell(Cell cell, int nCount) {
+	//Takes a Cell and the Cell's neighbor count and applies game logic
+	private Cell updateCell(Cell cell, int nCount) {
 		switch (nCount) {
 			case 0:
 			case 1:
@@ -105,9 +115,9 @@ public class gameLogic {
 		/*
 	TO-DO LIST:
     
-    Method for updating gameSpace depending on game rules using return from neighborCount() method
+   
 	
-	Method for updating one cell
+	Method for updating one cell based on game logic
     
     Getter method for 2d array to be able to fill with JComponents 
 		 */
