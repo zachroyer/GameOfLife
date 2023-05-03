@@ -4,22 +4,50 @@
  */
 package gameoflife;
 
-import java.awt.Component;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.GridLayout;
 import javax.swing.*;
+
 
 /**
  *
  * @author zachroyer
  */
-public class GUI{
+public class GUI extends JFrame{
     
     JFrame gui;
 
     public GUI() {
-        this.gui = new JFrame();
-        JButton button = new JButton();
-        gui.add(button);
+	    
+	gui = new JFrame();
+	setSize(1300, 700);
+	setLayout(new GridLayout());
+	setVisible(true);
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
+	setLocationRelativeTo(null);
+	
+	
+	gui.add(new Game());
+        
         
     }
     
+    
+    
+}
+
+
+class Game extends JPanel {
+	
+	public Game() {
+		setSize(1300,700);
+		setLayout(new GridLayout());
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		setBackground(Color.BLACK);
+	}
+	
 }

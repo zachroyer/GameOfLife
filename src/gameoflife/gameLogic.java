@@ -12,11 +12,11 @@ import java.util.Random;
 
 public class gameLogic {
 
-	Cell[][] gameSpace = new Cell[25][25];
+	Cell[][] gameSpace;
 //	ArrayList<ArrayList<Cell>> gameSpace = new ArrayList<>(25);
 
 	public gameLogic() {
-
+		gameSpace = new Cell[25][25];
 	}
 
 	//Overloaded constructor to specify if you want the gameSpace to display some cells for you
