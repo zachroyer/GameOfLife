@@ -46,7 +46,9 @@ public class gameLogic {
 			//Randomly Populates the gameSpace
 			for (int i = 0; i < 25; i++) {
 				for (int c = 0; c < 25; c++) {
-					getCell(i, c).changeState(state.nextInt(1));
+					if (state.nextInt() == 1) {
+						getCell(i, c).changeState();
+					}
 				}
 			}
 		}
@@ -59,15 +61,39 @@ public class gameLogic {
 	//Method for checking if neighbors are populated
 	private int neighborCount(Cell cell) {
 
-		return 1;
-//		int thisX = this.getCell(, 0)
+		int aliveNeighbors = 0;
+		int thisX = cell.position.x;
+		int thisY = cell.position.y;
+
+		for (int i = -1; i <= thisX + 2; i++) {
+			for (int l = -1; l <= thisY + 2; l++) {
+
+				if (i == 0 && l == 0) {
+					continue;
+				}
+
+				int neighborX = thisX + i;
+				int neighborY = thisY + l;
+
+				//Check if neighbor position is within bounds og game space
+				if (neighborX >= 0 && neighborX < gameSpace.length && neighborY >= 0 && neighborY < gameSpace[0].length) {
+					Cell neighborCell = gameSpace[neighborX][neighborY];
+
+					// Check if the neighbor cell is alive
+					if (neighborCell.alive) {
+						aliveNeighbors++;
+					}
+				}
+			}
+		}
+		return aliveNeighbors;
+	}
+
 //		switch () // if northwest neighbor exists
 //		//if northwest neighbor is alive
 //		//update neighbor count
 //		
 //		return 0;
-	}
-
 	/*
 	*	Cycles Through Grid
 	*	gets neighbor count of cell
@@ -91,34 +117,30 @@ public class gameLogic {
 
 			}
 		}
-		
+
 		//updates gameSpace with the cells that have been checked wiht game logic
 		this.gameSpace = nextState;
 	}
 
 	//Takes a Cell and the Cell's neighbor count and applies game logic
 	private Cell updateCell(Cell cell, int nCount) {
-		switch (nCount) {
-			case 0:
-			case 1:
 
-				break;
+		if (cell.alive) {
+			switch (nCount) {
+				case 0, 1 ->
+					cell.changeState();
+				case 4 ->
+					cell.changeState();
+				default -> {
+				}
+			}
 
-			case 2:
-			case 3:
-				break;
+		} else if (nCount == 3) {
 
-			default:
-
-				break;
 		}
 		/*
 	TO-DO LIST:
-    
-   
-	
-	Method for updating one cell based on game logic
-    
+        
     Getter method for 2d array to be able to fill with JComponents 
 		 */
 	}

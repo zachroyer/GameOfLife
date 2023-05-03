@@ -13,7 +13,7 @@ import java.awt.Point;
 public class Cell {
 
 	final public Point position;
-	boolean alive;
+	public boolean alive;
 	private int neighborCount;
 
 	public Cell(int xPos, int yPos, boolean state) {
@@ -26,12 +26,11 @@ public class Cell {
 		
 	}
 
-	public void changeState(int change) {
-		if (change == 1) {
+	public void changeState() {
 			alive ^= alive;
 		}
 
-	}
+	
 	
 	public void setNeighborCount(int nCount) {
 		this.neighborCount = nCount;
